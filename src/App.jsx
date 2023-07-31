@@ -1,11 +1,12 @@
-import './App.css'
+import './App.css';
+import Counter from './components/Counter';
 
 function App () {
   return (
     <>
-      <div>Hello World</div>
+      <Counter />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
