@@ -21,7 +21,7 @@ const Counter = props => {
 };
 
 const mapStateToProps = state => {
-  return state;
+  return state.counter;
 };
 
 const mapDispatchToProps = dispatch => {
