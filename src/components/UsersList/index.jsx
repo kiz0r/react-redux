@@ -1,14 +1,20 @@
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { getUsers } from '../../store/slices/usersSlice';
 
-const UsersList = ({ users, isLoading, error }) => {
+const UsersList = ({ users, isLoading, error, loadUsers }) => {
+  useEffect(() => {
+    loadUsers(1);
+  }, []);
+
   return (
     <>
       {isLoading && <div>Loading...</div>}
       {error && <div>Error</div>}
       {!isLoading && !error && (
         <ul>
-          {users.map(u => (
-            <li key={u.id}>{JSON.stringify(u)}</li>
+          {users.map((u, index) => (
+            <li key={index}>{JSON.stringify(u)}</li>
           ))}
         </ul>
       )}
@@ -18,4 +24,8 @@ const UsersList = ({ users, isLoading, error }) => {
 
 const mapStateToProps = ({ usersList }) => usersList;
 
-export default connect(mapStateToProps)(UsersList);
+const mapDispatchToProps = dispatch => ({
+  loadUsers: page => dispatch(getUsers(page)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersList);
